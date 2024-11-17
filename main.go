@@ -135,8 +135,6 @@ func main() {
 			fmt.Printf("Enter Item quantity:")
 			fmt.Scan(&item.quantity)
 
-			fmt.Println("item final", item)
-
 			inventory.AddItem(item)
 
 		// Update item case
