@@ -24,16 +24,24 @@ func (i Inventory) ViewItems() {
 		return
 	}
 
+	const COL_WIDTH int = 10
+
 	fmt.Println("Inventory Items")
 	fmt.Println("============================================")
-	fmt.Println("|     Item Name |     Quantity |     Price |")
+	fmt.Println("| Item Name          | Quantity | Price    |")
 	fmt.Println("--------------------------------------------")
 
 	for _, item := range i.items {
-		fmt.Printf("|     %v |     %v |     %v |\n", item.name, item.quantity, item.price)
+		quantity_str := fmt.Sprintf("%d", item.quantity)
+		price_str := fmt.Sprintf("%.2f", item.price)
+
+		name := fmt.Sprintf(" %v%*s ", item.name, COL_WIDTH*2-2-len(item.name), "")
+		quantity := fmt.Sprintf(" %v%*s ", quantity_str, COL_WIDTH-2-len(quantity_str), "")
+		price := fmt.Sprintf(" %v%*s ", price_str, COL_WIDTH-2-len(price_str), "")
+		fmt.Printf("|%v|%v|%v|\n", name, quantity, price)
 	}
 
-	fmt.Println("|               |              |           |")
+	fmt.Println("|                    |          |          |")
 	fmt.Println("============================================")
 }
 
