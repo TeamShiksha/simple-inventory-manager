@@ -125,21 +125,17 @@ func main() {
 		// Add item case
 		case 1:
 			item := InventoryItem{}
-			fmt.Println("item", item)
 
-			item.name = "Toothpaste"
-			item.quantity = 20
-			item.price = 55
-			// fmt.Printf("Enter Item name:")
-			// fmt.Scan(&item.name)
+			fmt.Printf("Enter Item name:")
+			fmt.Scan(&item.name)
 
-			// fmt.Printf("Enter Item price:")
-			// fmt.Scan(&item.price)
+			fmt.Printf("Enter Item price:")
+			fmt.Scan(&item.price)
 
-			// fmt.Printf("Enter Item quantity:")
-			// fmt.Scan(&item.quantity)
+			fmt.Printf("Enter Item quantity:")
+			fmt.Scan(&item.quantity)
 
-			// fmt.Println("item final", item)
+			fmt.Println("item final", item)
 
 			inventory.AddItem(item)
 
