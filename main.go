@@ -10,7 +10,17 @@ type InventoryItem struct {
 	price    float32
 }
 
+type Inventory struct {
+	items map[string]InventoryItem
+}
+
+func (i Inventory) AddItem(item InventoryItem) {
+	i.items[item.name] = item
+}
+
 func main() {
+	inventory := Inventory{make(map[string]InventoryItem)}
+
 	OPERATIONS := []string{
 		"Add item",
 		"Update Item",
@@ -41,22 +51,40 @@ func main() {
 		case 1:
 			item := InventoryItem{}
 			fmt.Println("item", item)
-			fmt.Printf("Enter Item name:")
-			fmt.Scan(&item.name)
 
-			fmt.Printf("Enter Item price:")
-			fmt.Scan(&item.price)
+			item.name = "Toothpaste"
+			item.quantity = 20
+			item.price = 55
+			// fmt.Printf("Enter Item name:")
+			// fmt.Scan(&item.name)
 
-			fmt.Printf("Enter Item quantity:")
-			fmt.Scan(&item.quantity)
+			// fmt.Printf("Enter Item price:")
+			// fmt.Scan(&item.price)
 
-			fmt.Println("item final", item)
+			// fmt.Printf("Enter Item quantity:")
+			// fmt.Scan(&item.quantity)
+
+			// fmt.Println("item final", item)
+
+			inventory.AddItem(item)
+
 		case 2:
 			fmt.Println("You chose Operation 2")
+
 		case 3:
 			fmt.Println("You chose Operation 3")
+
 		case 4:
-			fmt.Println("You chose Operation 4")
+			fmt.Println("Inventory Items")
+			fmt.Println("--------------------------------------------")
+			fmt.Println("|     Item Name |     Quantity |     Price |")
+
+			for _, item := range inventory.items {
+				fmt.Printf("|     %v |     %v |     %v |", item.name, item.quantity, item.price)
+			}
+
+			fmt.Println()
+
 		case 5:
 			fmt.Println("Exiting...")
 			return
