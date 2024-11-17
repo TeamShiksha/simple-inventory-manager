@@ -19,15 +19,69 @@ func (i Inventory) AddItem(item InventoryItem) {
 }
 
 func (i Inventory) ViewItems() {
-	fmt.Println("Inventory Items")
-	fmt.Println("--------------------------------------------")
-	fmt.Println("|     Item Name |     Quantity |     Price |")
-
-	for _, item := range i.items {
-		fmt.Printf("|     %v |     %v |     %v |", item.name, item.quantity, item.price)
+	if len(i.items) == 0 {
+		fmt.Println("Inventory is empty!!")
+		return
 	}
 
-	fmt.Println()
+	fmt.Println("Inventory Items")
+	fmt.Println("============================================")
+	fmt.Println("|     Item Name |     Quantity |     Price |")
+	fmt.Println("--------------------------------------------")
+
+	for _, item := range i.items {
+		fmt.Printf("|     %v |     %v |     %v |\n", item.name, item.quantity, item.price)
+	}
+
+	fmt.Println("|               |              |           |")
+	fmt.Println("============================================")
+}
+
+func (i Inventory) UpdateItem() {
+	if len(i.items) == 0 {
+		fmt.Println("Inventory is empty!!")
+		return
+	}
+
+	var itemName string
+	fmt.Printf("Enter Item name:")
+	fmt.Scan(&itemName)
+
+	if _, ok := i.items[itemName]; ok {
+		item := InventoryItem{}
+		fmt.Printf("Enter item's new name:")
+		fmt.Scan(&item.name)
+
+		fmt.Printf("Enter item's new price:")
+		fmt.Scan(&item.price)
+
+		fmt.Printf("Enter item' new quantity:")
+		fmt.Scan(&item.quantity)
+
+		delete(i.items, itemName)
+		i.AddItem(item)
+		fmt.Println("Item updated!!")
+	} else {
+		fmt.Println("Item not found!!")
+	}
+}
+
+func (i Inventory) DeleteItem() {
+	if len(i.items) == 0 {
+		fmt.Println("Inventory is empty!!")
+		return
+	}
+
+	var itemName string
+	fmt.Printf("Enter Item name:")
+	fmt.Scan(&itemName)
+
+	if _, ok := i.items[itemName]; ok {
+		delete(i.items, itemName)
+		fmt.Println("Item deleted!!")
+	} else {
+		fmt.Println("Item not found!!")
+	}
 }
 
 func main() {
@@ -60,6 +114,7 @@ func main() {
 		fmt.Println("Your choice:", choice)
 
 		switch choice {
+		// Add item case
 		case 1:
 			item := InventoryItem{}
 			fmt.Println("item", item)
@@ -80,12 +135,15 @@ func main() {
 
 			inventory.AddItem(item)
 
+		// Update item case
 		case 2:
-			fmt.Println("You chose Operation 2")
+			inventory.UpdateItem()
 
+		// Delete item case
 		case 3:
-			fmt.Println("You chose Operation 3")
+			inventory.DeleteItem()
 
+		// View items case
 		case 4:
 			inventory.ViewItems()
 
