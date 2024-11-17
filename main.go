@@ -18,6 +18,18 @@ func (i Inventory) AddItem(item InventoryItem) {
 	i.items[item.name] = item
 }
 
+func (i Inventory) ViewItems() {
+	fmt.Println("Inventory Items")
+	fmt.Println("--------------------------------------------")
+	fmt.Println("|     Item Name |     Quantity |     Price |")
+
+	for _, item := range i.items {
+		fmt.Printf("|     %v |     %v |     %v |", item.name, item.quantity, item.price)
+	}
+
+	fmt.Println()
+}
+
 func main() {
 	inventory := Inventory{make(map[string]InventoryItem)}
 
@@ -75,15 +87,7 @@ func main() {
 			fmt.Println("You chose Operation 3")
 
 		case 4:
-			fmt.Println("Inventory Items")
-			fmt.Println("--------------------------------------------")
-			fmt.Println("|     Item Name |     Quantity |     Price |")
-
-			for _, item := range inventory.items {
-				fmt.Printf("|     %v |     %v |     %v |", item.name, item.quantity, item.price)
-			}
-
-			fmt.Println()
+			inventory.ViewItems()
 
 		case 5:
 			fmt.Println("Exiting...")
